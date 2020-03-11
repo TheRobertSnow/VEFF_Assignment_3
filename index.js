@@ -18,9 +18,23 @@ var http = require("http");
 // request.method # Returns the request HTTP method used.
 
 function onRequest(request, response) {
-  response.writeHead(200, {"Content-Type": "text/plain"});
-  response.write("Hello World");
-  response.end();
+    switch(request.method) {
+        case "POST":
+            // code block
+            response.writeHead(200, {"Content-Type": "text/plain"});
+            response.write("I'm POST gay");
+            break;
+        // case y:
+        //     // code block
+        //     break;
+        default:
+            // code block
+            response.writeHead(200, {"Content-Type": "text/plain"});
+            response.write("I'm gay");
+}
+    // response.writeHead(200, {"Content-Type": "text/plain"});
+    // response.write("Hello World");
+    response.end();
 }
 
 http.createServer(onRequest).listen(8000);
