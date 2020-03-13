@@ -13,36 +13,57 @@ var bookings = [
     { id: 2, firstName: "Meðaljón", lastName: "Jónsson", tel: "+3541111111", email: "mj@test.is", spots: 5}
 ];
 
-var http = require("http");
 
-// request.method # Returns the request HTTP method used.
+const express = require("express");
+const app = express();
+const port = 3000;
 
-function onRequest(request, response) {
-    switch(request.method) {
-        case "POST":
-            // A POST request is used to send data to the server, for example, customer information, file upload, etc. using HTML forms.
-            response.writeHead(200, {"Content-Type": "text/plain"});
-            response.write("POST gay");
-            break;
-        case "GET":
-            // The GET method is used to retrieve information from the given server using a given URI.
-            // Requests using GET should only retrieve data and should have no other effect on the data.
-            response.writeHead(200, {"Content-Type": "text/plain"});
-            response.write("GET gay");
-            break;
-        case "DELETE":
-            // Removes all current representations of the target resource given by a URI.
-            response.writeHead(200, {"Content-Type": "text/plain"});
-            response.write("DELETE gay");
-            break;
-        default:
-            // code block
-            response.writeHead(200, {"Content-Type": "text/plain"});
-            response.write("I'm gay");
-}
-    // response.writeHead(200, {"Content-Type": "text/plain"});
-    // response.write("Hello World");
-    response.end();
-}
+app.get('/', (req, res) => {
+  res.status(200).send('Hello World!');
+});
+app.get('/events', (req, res) => {
+  res.status(200).send('Hello World!');
+});
+app.get('/events/:id', (req, res) => {
+  res.status(200).send('Hello World!');
+});
+app.use('*', (req, res) => {
+  res.status(405).send('Operation not supported.');
+});
+app.listen(port, () => {
+  console.log('Express app listening on port ' + port);
+});
 
-http.createServer(onRequest).listen(8000);
+// var http = require("http");
+//
+// // request.method # Returns the request HTTP method used.
+//
+// function onRequest(request, response) {
+//     switch(request.method) {
+//         case "POST":
+//             // A POST request is used to send data to the server, for example, customer information, file upload, etc. using HTML forms.
+//             response.writeHead(200, {"Content-Type": "text/plain"});
+//             response.write("POST gay");
+//             break;
+//         case "GET":
+//             // The GET method is used to retrieve information from the given server using a given URI.
+//             // Requests using GET should only retrieve data and should have no other effect on the data.
+//             response.writeHead(200, {"Content-Type": "text/plain"});
+//             response.write("GET gay");
+//             break;
+//         case "DELETE":
+//             // Removes all current representations of the target resource given by a URI.
+//             response.writeHead(200, {"Content-Type": "text/plain"});
+//             response.write("DELETE gay");
+//             break;
+//         default:
+//             // code block
+//             response.writeHead(200, {"Content-Type": "text/plain"});
+//             response.write("I'm gay");
+// }
+//     // response.writeHead(200, {"Content-Type": "text/plain"});
+//     // response.write("Hello World");
+//     response.end();
+// }
+//
+// http.createServer(onRequest).listen(8000);
